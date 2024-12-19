@@ -25,7 +25,7 @@
                         </div>
                         <div>
                             <p class="text-gray-900 font-medium">Phone</p>
-                            <p class="text-gray-600">260970983828</p>
+                            <p class="text-gray-600">+260974323234</p>
                         </div>
                     </div>
 
