@@ -9,6 +9,17 @@ class ServiceRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_id', 'name', 'email', 'description', 'attachments', 'status'];
+    protected $fillable = [
+        'service_id', 
+        'name', 
+        'email', 
+        'description', 
+        'file_path', 
+        'status'];
     protected $casts = ['attachments' => 'array'];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

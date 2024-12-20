@@ -15,7 +15,6 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/services/{service}/request', [ServiceController::class, 'request'])->name('services.request');
 Route::post('/services/submit-request', [ServiceController::class, 'submitRequest'])->name('services.submit-request');
@@ -23,11 +22,18 @@ Route::post('/services/submit-request', [ServiceController::class, 'submitReques
 // Authentication Routes (provided by Laravel Breeze)
 require __DIR__ . '/auth.php';
 
-// Protected Admin Routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+// // Protected Admin Routes
+// Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+//     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+//     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
+//     Route::get('/manage-services', [ServiceController::class, 'manage'])->name('services.manage');
+//     Route::resource('services', AdminServiceController::class);
+//     Route::resource('requests', AdminRequestController::class);
+// });
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
-    Route::get('/manage-services', [ServiceController::class, 'manage'])->name('services.manage');
     Route::resource('services', AdminServiceController::class);
     Route::resource('requests', AdminRequestController::class);
 });

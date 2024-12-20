@@ -12,17 +12,29 @@
             <!-- Center: Main Navigation -->
             <div class="hidden md:flex space-x-8">
                 <a href="#" class="text-white hover:text-gray-200">PRODUCTS</a>
-                <a href="#" class="text-white hover:text-gray-200">SERVICES</a>
+                <a href="/services" class="text-white hover:text-gray-200">SERVICES</a>
                 <a href="#" class="text-white hover:text-gray-200">RESOURCES</a>
                 <a href="#" class="text-white hover:text-gray-200">PRICING</a>
             </div>
 
             <!-- Right Side: Auth -->
             <div class="flex items-center space-x-4">
-                <a href="{{ route('login') }}" class="text-white hover:text-gray-200">LOG IN</a>
-                <a href="{{ route('register') }}" class="bg-white text-blue-600 px-6 py-2 rounded hover:bg-gray-100">
-                    GET STARTED
-                </a>
+                @auth
+                    @if (auth()->user()->is_admin)
+                        <a href="{{ route('admin.dashboard') }}" class="text-white hover:text-gray-200">ADMIN</a>
+                    @endif
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-white hover:text-gray-200">
+                            LOGOUT
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="text-white hover:text-gray-200">LOG IN</a>
+                    <a href="{{ route('register') }}" class="bg-white text-blue-600 px-6 py-2 rounded hover:bg-gray-100">
+                        GET STARTED
+                    </a>
+                @endauth
             </div>
         </div>
     </div>

@@ -22,11 +22,11 @@
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
                     Dashboard
                 </a>
-                <a href="{{ route('admin.services') }}"
+                <a href="{{ route('admin.services.index') }}"
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
                     Services
                 </a>
-                <a href="{{ route('admin.requests') }}"
+                <a href="{{ route('admin.requests.index') }}"
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
                     Service Requests
                 </a>
