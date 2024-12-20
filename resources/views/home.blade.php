@@ -85,7 +85,7 @@
                             </div>
                             <div>
                                 <p class="font-medium text-blue-600">Speak to an agent</p>
-                                <p class="text-gray-600">250970983828</p>
+                                <p class="text-gray-600">+260974323234</p>
                             </div>
                         </div>
 
@@ -117,7 +117,6 @@
                             </div>
                         </div>
 
-                        <!-- Social Media -->
                         <!-- Social Media Section -->
                         <div class="pt-6">
                             <p class="font-medium text-blue-600 mb-4">Follow us on social media</p>
@@ -163,7 +162,7 @@
                     <div class="aspect-square relative">
                         <!-- Circle mask with image -->
                         <div class="absolute inset-0 rounded-full overflow-hidden border-8 border-white shadow-lg">
-                            <img src="{{ asset('images/contact-image.jpg') }}" alt="Contact"
+                            <img src="{{ asset('images/contact-image.webp') }}" alt="Contact"
                                 class="w-full h-full object-cover">
                         </div>
                     </div>
