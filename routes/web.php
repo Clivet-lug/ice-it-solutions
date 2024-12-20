@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminRequestController;
+use App\Http\Controllers\Admin\AdminServiceController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -22,7 +25,9 @@ require __DIR__ . '/auth.php';
 
 // Protected Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
     Route::get('/manage-services', [ServiceController::class, 'manage'])->name('services.manage');
+    Route::resource('services', AdminServiceController::class);
+    Route::resource('requests', AdminRequestController::class);
 });
