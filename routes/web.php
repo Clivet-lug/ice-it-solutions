@@ -12,6 +12,11 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+Route::get('/services/{service}/request', [ServiceController::class, 'request'])->name('services.request');
+Route::post('/services/submit-request', [ServiceController::class, 'submitRequest'])->name('services.submit-request');
+
 // Authentication Routes (provided by Laravel Breeze)
 require __DIR__ . '/auth.php';
 

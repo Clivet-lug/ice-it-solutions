@@ -28,31 +28,49 @@
     </div>
 
     <!-- Services Section -->
-    <div class="max-w-7xl mx-auto px-4 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Document Formatting -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4">Document formatting</h3>
-                <p class="text-gray-600">
-                    Have any document typed out in a format of your choosing.
-                    You may send us a word document, pdf, or a hand written picture.
-                </p>
-            </div>
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Document Formatting -->
+                <div
+                    class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-blue-100">
+                    <img src="{{ asset('images/document-icon.svg') }}" alt="Document" class="w-16 h-16 mb-4 text-blue-600">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Document formatting</h3>
+                    <p class="text-blue-700 mb-4">Have any document typed out in a format of your choosing.</p>
+                    <a href="{{ route('services.show', 'document-formatting') }}"
+                        class="text-blue-600 hover:text-blue-800 flex items-center">Learn more <svg class="w-4 h-4 ml-1"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg></a>
+                </div>
 
-            <!-- Present like a Pro -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4">Present like a Pro</h3>
-                <p class="text-gray-600">
-                    Have professionally redesigned Presentations designed to capture your audience.
-                </p>
-            </div>
+                <!-- Present like a Pro -->
+                <div
+                    class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-blue-100">
+                    <img src="{{ asset('images/presentation-icon.svg') }}" alt="Presentation"
+                        class="w-16 h-16 mb-4 text-blue-600">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Present like a Pro</h3>
+                    <p class="text-blue-700 mb-4">Have professionally redesigned Presentations designed to capture your
+                        audience.</p>
+                    <a href="{{ route('services.show', 'presentation-design') }}"
+                        class="text-blue-600 hover:text-blue-800 flex items-center">Learn more <svg class="w-4 h-4 ml-1"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg></a>
+                </div>
 
-            <!-- Create a Website -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4">Create a Website</h3>
-                <p class="text-gray-600">
-                    Work with a UI/UX designer and have a beautiful website tailor made to suit your needs.
-                </p>
+                <!-- Create a Website -->
+                <div
+                    class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-blue-100">
+                    <img src="{{ asset('images/website-icon.svg') }}" alt="Website" class="w-16 h-16 mb-4 text-blue-600">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">Create a Website</h3>
+                    <p class="text-blue-700 mb-4">Work with a UI/UX designer and have a beautiful website tailor made.</p>
+                    <a href="{{ route('services.show', 'website-creation') }}"
+                        class="text-blue-600 hover:text-blue-800 flex items-center">Learn more <svg class="w-4 h-4 ml-1"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg></a>
+                </div>
             </div>
         </div>
     </div>
