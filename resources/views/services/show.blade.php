@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-gray-50 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-blue-100 rounded-lg shadow-lg overflow-hidden">
                 <div class="md:flex">
                     <!-- Service Image -->
                     <div class="md:flex-shrink-0">
@@ -38,12 +38,12 @@
                         <!-- Pricing -->
                         <div class="mb-8">
                             <h2 class="text-xl font-bold text-gray-900 mb-4">Pricing</h2>
-                            <p class="text-3xl font-bold text-blue-600">Starting at ${{ $service->price }}</p>
+                            <p class="text-3xl font-bold text-blue-900">Starting at K{{ $service->price }}</p>
                         </div>
 
                         <!-- Request Button -->
                         <a href="{{ route('services.request', $service) }}"
-                            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700">
+                            class="inline-block bg-blue-800 text-white px-8 py-3 rounded-md hover:bg-blue-900">
                             Request This Service
                         </a>
                     </div>

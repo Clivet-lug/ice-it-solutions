@@ -8,6 +8,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\PortfolioController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -19,17 +20,10 @@ Route::get('/services/{service}', [ServiceController::class, 'show'])->name('ser
 Route::get('/services/{service}/request', [ServiceController::class, 'request'])->name('services.request');
 Route::post('/services/submit-request', [ServiceController::class, 'submitRequest'])->name('services.submit-request');
 
+
+
 // Authentication Routes (provided by Laravel Breeze)
 require __DIR__ . '/auth.php';
-
-// // Protected Admin Routes
-// Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-//     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-//     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
-//     Route::get('/manage-services', [ServiceController::class, 'manage'])->name('services.manage');
-//     Route::resource('services', AdminServiceController::class);
-//     Route::resource('requests', AdminRequestController::class);
-// });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');

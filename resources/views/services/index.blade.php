@@ -18,7 +18,7 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $service->name }}</h3>
                             <p class="text-gray-600 mb-4">{{ $service->short_description }}</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-blue-600 font-bold">Starting at ${{ $service->price }}</span>
+                                <span class="text-blue-600 font-bold">Starting at K{{ $service->price }}</span>
                                 <a href="{{ route('services.show', $service) }}"
                                     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                                     View Details
