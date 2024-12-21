@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'ICE IT Solutions') }}</title>
+    {{-- <title>{{ config('app.name', 'ICE IT Solutions') }}</title> --}}
+    <title>ICE IT SOLUTIONS</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

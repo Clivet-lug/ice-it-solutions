@@ -13,6 +13,7 @@
             <div class="hidden md:flex space-x-8">
                 <a href="#" class="text-white hover:text-gray-200">PRODUCTS</a>
                 <a href="/services" class="text-white hover:text-gray-200">SERVICES</a>
+                <a href="{{ route('portfolio.index') }}" class="text-white hover:text-gray-200">PORTFOLIO</a>
                 <a href="#" class="text-white hover:text-gray-200">RESOURCES</a>
                 <a href="#" class="text-white hover:text-gray-200">PRICING</a>
             </div>
@@ -47,6 +48,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')">
                 {{ __('Services') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('portfolio.index')" :active="request()->routeIs('portfolio.*')">
+                {{ __('Portfolio') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
                 {{ __('Contact') }}

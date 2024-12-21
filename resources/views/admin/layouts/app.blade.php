@@ -12,7 +12,7 @@
 <body class="bg-gray-100">
     <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-100">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-30 w-64 bg-blue-800 transition duration-300">
+        <div class="fixed inset-y-0 left-0 z-30 w-64 bg-blue-900 transition duration-300">
             <div class="flex items-center justify-center h-20">
                 <div class="text-white text-2xl font-bold">Admin Panel</div>
             </div>
@@ -25,6 +25,10 @@
                 <a href="{{ route('admin.services.index') }}"
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
                     Services
+                </a>
+                <a href="{{ route('admin.portfolio.index') }}"
+                    class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
+                    Portfolio
                 </a>
                 <a href="{{ route('admin.requests.index') }}"
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
