@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
@@ -31,6 +32,8 @@ Route::post('/services/submit-request', [ServiceController::class, 'submitReques
 Route::get('/portfolio', [PortfolioController::class, 'publicIndex'])->name('portfolio.index');
 Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
+// Pricing routes
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
 
 
 // Authentication Routes (provided by Laravel Breeze)
@@ -51,4 +54,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Portfolio
     Route::resource('portfolio', PortfolioController::class);
+
+    // Pricing
+    Route::resource('pricing', PricingController::class);
 });

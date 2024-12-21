@@ -5,23 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pricing extends Model
+class Resource extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'type',
-        'price',
-        'features',
-        'button_text',
+        'description',
+        'content',
+        'file_path',
         'is_featured',
-        'is_active'
+        'is_public'
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
-        'is_active' => 'boolean',
-        'features' => 'array'
+        'is_public' => 'boolean'
     ];
 }

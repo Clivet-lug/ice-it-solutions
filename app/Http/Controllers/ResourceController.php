@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pricing;
+use App\Models\Resource;
 use Illuminate\Http\Request;
 
-class PricingController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $pricings = Pricing::where('is_active', true)->get();
-        return view('pricing.index', compact('pricings'));
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class PricingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pricing  $pricing
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function show(Pricing $pricing)
+    public function show(Resource $resource)
     {
         //
     }
@@ -53,10 +52,10 @@ class PricingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pricing  $pricing
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pricing $pricing)
+    public function edit(Resource $resource)
     {
         //
     }
@@ -65,10 +64,10 @@ class PricingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pricing  $pricing
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pricing $pricing)
+    public function update(Request $request, Resource $resource)
     {
         //
     }
@@ -76,10 +75,10 @@ class PricingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pricing  $pricing
+     * @param  \App\Models\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pricing $pricing)
+    public function destroy(Resource $resource)
     {
         //
     }
