@@ -128,7 +128,7 @@ class PortfolioController extends Controller
     // Public view methods
     public function show(Portfolio $portfolio)
     {
-        return view('portfolio.show', compact('portfolio'),['project' => $portfolio]);
+        return view('portfolio.show', compact('portfolio'));
     }
 
     public function publicIndex()
