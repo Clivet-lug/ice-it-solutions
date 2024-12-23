@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="absolute top-0 left-0 right-0 z-50">
+<nav x-data="{ open: false }"
+    class="absolute top-0 left-0 right-0 z-50 {{ !request()->routeIs('home') ? 'bg-gray-100 shadow-lg backdrop-blur-sm bg-opacity-95' : '' }}">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
@@ -11,27 +12,35 @@
 
             <!-- Center: Main Navigation -->
             <div class="hidden md:flex space-x-8">
-                <a href="{{ route('services') }}" class="text-white hover:text-gray-200">SERVICES</a>
-                <a href="{{ route('portfolio.index') }}" class="text-white hover:text-gray-200">PORTFOLIO</a>
-                <a href="#" class="text-white hover:text-gray-200">RESOURCES</a>
-                <a href="{{ route('pricing.index') }}" class="text-white hover:text-gray-200">PRICING</a>
+                @php
+                    $navLinkClass = request()->routeIs('home')
+                        ? 'text-white hover:text-gray-200'
+                        : 'text-gray-800 hover:text-blue-600';
+                @endphp
+
+                <a href="{{ route('services') }}" class="{{ $navLinkClass }}">SERVICES</a>
+                <a href="{{ route('portfolio.index') }}" class="{{ $navLinkClass }}">PORTFOLIO</a>
+                <a href="#" class="{{ $navLinkClass }}">RESOURCES</a>
+                <a href="{{ route('pricing.index') }}" class="{{ $navLinkClass }}">PRICING</a>
             </div>
 
             <!-- Right Side: Auth -->
             <div class="flex items-center space-x-4">
                 @auth
                     @if (auth()->user()->is_admin)
-                        <a href="{{ route('admin.dashboard') }}" class="text-white hover:text-gray-200">ADMIN</a>
+                        <a href="{{ route('admin.dashboard') }}" class="{{ $navLinkClass }}">ADMIN</a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
-                        <button type="submit" class="text-white hover:text-gray-200">
+                        <button type="submit" class="{{ $navLinkClass }}">
                             LOGOUT
                         </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="text-white hover:text-gray-200">LOG IN</a>
-                    <a href="{{ route('register') }}" class="bg-white text-blue-600 px-6 py-2 rounded hover:bg-gray-100">
+                    <a href="{{ route('register') }}"
+                        class="{{ request()->routeIs('home') ? 'bg-white text-blue-600' : 'bg-blue-600 text-white' }} 
+                            px-6 py-2 rounded hover:opacity-90">
                         GET STARTED
                     </a>
                 @endauth
@@ -41,8 +50,13 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-2 pb-3 space-y-1 {{ request()->routeIs('home') ? 'bg-black/80' : 'bg-blue-900' }}">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                @php
+                    $mobileNavLinkClass = request()->routeIs('home')
+                        ? 'text-white hover:bg-gray-700'
+                        : 'text-gray-800 hover:bg-gray-100';
+                @endphp
                 {{ __('Home') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')">
