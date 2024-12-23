@@ -14,16 +14,16 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $pricings = Pricing::where('is_active', true)
-            ->get()
-            ->map(function ($plan) {
-                if (is_string($plan->features)) {
-                    $plan->features = json_decode($plan->features, true) ?? [];
-                }
-                return $plan;
-            });
+        $pricings = Pricing::where('is_active', true)->get();
 
-        return view('pricing.index', compact('pricings'));
+        $counts = [
+            'all' => $pricings->count(),
+            'website' => $pricings->where('type', 'Website')->count(),
+            'document' => $pricings->where('type', 'Document')->count(),
+            'presentation' => $pricings->where('type', 'Presentation')->count(),
+        ];
+
+        return view('pricing.index', compact('pricings', 'counts'));
     }
 
     /**
