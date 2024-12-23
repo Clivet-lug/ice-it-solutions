@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }"
-    class="absolute top-0 left-0 right-0 z-50 {{ !request()->routeIs('home') ? 'bg-gray-100 shadow-lg backdrop-blur-sm bg-opacity-95' : '' }}">
+    class="absolute top-0 left-0 right-0 z-50 {{ !request()->routeIs('home') ? 'bg-[#5B89AF] shadow-lg backdrop-blur-sm bg-opacity-95' : '' }}">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
@@ -14,14 +14,14 @@
             <div class="hidden md:flex space-x-8">
                 @php
                     $navLinkClass = request()->routeIs('home')
-                        ? 'text-white hover:text-gray-200'
-                        : 'text-gray-800 hover:text-blue-600';
+                        ? 'text-white hover:text-gray-900'
+                        : 'text-gray-800 hover:text-blue-300';
                 @endphp
 
                 <a href="{{ route('services') }}" class="{{ $navLinkClass }}">SERVICES</a>
+                <a href="{{ route('pricing.index') }}" class="{{ $navLinkClass }}">PRICING</a>
                 <a href="{{ route('portfolio.index') }}" class="{{ $navLinkClass }}">PORTFOLIO</a>
                 <a href="#" class="{{ $navLinkClass }}">RESOURCES</a>
-                <a href="{{ route('pricing.index') }}" class="{{ $navLinkClass }}">PRICING</a>
             </div>
 
             <!-- Right Side: Auth -->
@@ -37,7 +37,7 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="text-white hover:text-gray-200">LOG IN</a>
+                    <a href="{{ route('login') }}" class="text-white hover:text-gray-300">LOG IN</a>
                     <a href="{{ route('register') }}"
                         class="{{ request()->routeIs('home') ? 'bg-white text-blue-600' : 'bg-blue-600 text-white' }} 
                             px-6 py-2 rounded hover:opacity-90">

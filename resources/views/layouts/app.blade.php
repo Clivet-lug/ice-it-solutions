@@ -40,7 +40,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="{{ !request()->routeIs('home') ? 'pt-20' : '' }}">
             @yield('content')
         </main>
 
