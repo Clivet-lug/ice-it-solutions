@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\Admin\PricingController;
+use App\Http\Controllers\PricingController;
+use App\Http\Controllers\Admin\AdminPricingController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
@@ -33,7 +34,7 @@ Route::get('/portfolio', [PortfolioController::class, 'publicIndex'])->name('por
 Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 // Pricing routes
-Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
+Route::get('/pricing', [App\Http\Controllers\PricingController::class, 'index'])->name('pricing.index');
 
 
 // Authentication Routes (provided by Laravel Breeze)
@@ -56,5 +57,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('portfolio', PortfolioController::class);
 
     // Pricing
-    Route::resource('pricing', PricingController::class);
+    Route::resource('pricing', AdminPricingController::class);
 });

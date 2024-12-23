@@ -53,12 +53,21 @@
                             </p>
 
                             <ul class="mt-6 space-y-4">
-                                @foreach (json_decode($plan->features) as $feature)
-                                    <li class="flex">
-                                        <span class="text-green-500 mr-2">✓</span>
-                                        <span class="text-gray-600">{{ $feature }}</span>
-                                    </li>
-                                @endforeach
+                                @if (is_array($plan->features))
+                                    @foreach ($plan->features as $feature)
+                                        <li class="flex">
+                                            <span class="text-green-500 mr-2">✓</span>
+                                            <span class="text-gray-600">{{ $feature }}</span>
+                                        </li>
+                                    @endforeach
+                                @elseif(is_string($plan->features))
+                                    @foreach (json_decode($plan->features, true) ?? [] as $feature)
+                                        <li class="flex">
+                                            <span class="text-green-500 mr-2">✓</span>
+                                            <span class="text-gray-600">{{ $feature }}</span>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
 

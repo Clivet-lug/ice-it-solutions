@@ -35,6 +35,10 @@
                     class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
                     Service Requests
                 </a>
+                <a href="{{ route('admin.pricing.index') }}"
+                    class="group flex items-center px-2 py-2 text-white hover:bg-blue-700 rounded-md">
+                    Pricng
+                </a>
             </nav>
         </div>
 

@@ -14,7 +14,15 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $pricings = Pricing::where('is_active', true)->get();
+        $pricings = Pricing::where('is_active', true)
+            ->get()
+            ->map(function ($plan) {
+                if (is_string($plan->features)) {
+                    $plan->features = json_decode($plan->features, true) ?? [];
+                }
+                return $plan;
+            });
+
         return view('pricing.index', compact('pricings'));
     }
 

@@ -6,7 +6,7 @@ use App\Models\Pricing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PricingController extends Controller
+class AdminPricingController extends Controller
 {
     public function index()
     {
