@@ -41,7 +41,7 @@
                     <label class="block text-sm font-medium text-gray-700">Price</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="text-gray-500 sm:text-sm">$</span>
+                            <span class="text-gray-500 sm:text-sm">K</span>
                         </div>
                         <input type="number" name="price" step="0.01"
                             value="{{ old('price', $pricing->price ?? '') }}"
