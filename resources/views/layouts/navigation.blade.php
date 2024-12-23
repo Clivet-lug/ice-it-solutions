@@ -11,7 +11,6 @@
 
             <!-- Center: Main Navigation -->
             <div class="hidden md:flex space-x-8">
-                <a href="#" class="text-white hover:text-gray-200">PRODUCTS</a>
                 <a href="{{ route('services') }}" class="text-white hover:text-gray-200">SERVICES</a>
                 <a href="{{ route('portfolio.index') }}" class="text-white hover:text-gray-200">PORTFOLIO</a>
                 <a href="#" class="text-white hover:text-gray-200">RESOURCES</a>
