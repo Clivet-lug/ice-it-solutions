@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'slug',
@@ -23,8 +27,29 @@ class Service extends Model
         'price' => 'decimal:2'
     ];
 
-    public function getRouteKeyName()
+    public function requests()
     {
-        return 'slug';
+        return $this->hasMany(ServiceRequest::class);
+    }
+
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($service) {
+            if (!$service->slug) {
+                $service->slug = Str::slug($service->name);
+            }
+        });
+    }
+
+    public function getFeaturesAttribute($value)
+    {
+        return $value ? json_decode($value, true) : [];
     }
 }

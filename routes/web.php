@@ -49,9 +49,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Contact
     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
 
-    // Service 
+    // Service and Requests
     Route::resource('services', AdminServiceController::class);
     Route::resource('requests', AdminRequestController::class);
+
+    Route::post('requests/{request}/notes', [AdminRequestController::class, 'updateNotes'])
+        ->name('requests.update-notes');
+    Route::get(
+        'requests/{request}/download/{attachmentIndex}',
+        [AdminRequestController::class, 'downloadAttachment']
+    )
+        ->name('requests.download');
 
     // Portfolio
     Route::resource('portfolio', PortfolioController::class);

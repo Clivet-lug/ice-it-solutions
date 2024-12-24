@@ -10,12 +10,14 @@ class ServiceRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id', 
-        'name', 
-        'email', 
-        'description', 
-        'file_path', 
-        'status'];
+        'service_id',
+        'name',
+        'email',
+        'description',
+        'file_path',
+        'attachments',
+        'status'
+    ];
     protected $casts = ['attachments' => 'array'];
 
     public function service()
