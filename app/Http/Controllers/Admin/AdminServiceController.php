@@ -16,15 +16,17 @@ class AdminServiceController extends Controller
     {
         $query = Service::query();
 
-        // Add search functionality
+        // Handle search
         if ($search = $request->get('search')) {
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('short_description', 'like', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('short_description', 'like', "%{$search}%");
+            });
         }
 
-        // Add filters
-        if ($status = $request->get('status')) {
-            $query->where('is_active', $status === 'active');
+        // Handle status filter
+        if ($request->has('status')) {
+            $query->where('is_active', $request->status);
         }
 
         $services = $query->latest()->paginate(10);

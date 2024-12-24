@@ -1,9 +1,8 @@
 @extends('admin.layouts.app')
-@include('partials._alerts')
+
 
 @section('content')
     <div class="container mx-auto px-4 py-6">
-        <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-semibold text-gray-900">Manage Services</h1>
             <a href="{{ route('admin.services.create') }}"
@@ -17,16 +16,12 @@
             <form action="{{ route('admin.services.index') }}" method="GET" class="flex gap-4">
                 <div class="flex-1">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search services..."
-                        class="w-full rounded-lg border-gray-300">
+                        class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                 </div>
-                <div class="w-48">
-                    <select name="status" class="w-full rounded-lg border-gray-300">
-                        <option value="">All Status</option>
-                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                    </select>
-                </div>
-                <button type="submit" class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200">
+
+                @include('partials.admin._status-filter')
+
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                     Filter
                 </button>
             </form>
@@ -59,11 +54,8 @@
                                         </div>
                                     @endif
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            {{ $service->name }}
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            {{ Str::limit($service->short_description, 50) }}
+                                        <div class="text-sm font-medium text-gray-900">{{ $service->name }}</div>
+                                        <div class="text-sm text-gray-500">{{ Str::limit($service->short_description, 50) }}
                                         </div>
                                     </div>
                                 </div>
@@ -82,12 +74,15 @@
                                 <div class="flex space-x-3">
                                     <a href="{{ route('admin.services.edit', $service) }}"
                                         class="text-blue-600 hover:text-blue-900">Edit</a>
-                                    <form action="{{ route('admin.services.destroy', $service) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this service?');"
+                                    <form id="delete-form-{{ $service->id }}"
+                                        action="{{ route('admin.services.destroy', $service) }}" method="POST"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                        <button type="button" onclick="confirmDelete('delete-form-{{ $service->id }}')"
+                                            class="text-red-600 hover:text-red-900">
+                                            Delete
+                                        </button>
                                     </form>
                                 </div>
                             </td>
