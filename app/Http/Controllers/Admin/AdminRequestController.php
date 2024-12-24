@@ -59,38 +59,37 @@ class AdminRequestController extends Controller
 
     public function update(Request $request, ServiceRequest $serviceRequest)
     {
-        try {
-            $validated = $request->validate([
-                'status' => 'required|in:pending,processing,completed,cancelled',
-                'admin_notes' => 'nullable|string|max:1000',
-                'priority' => 'nullable|in:low,medium,high'
-            ]);
+        // try {
+        $validated = $request->validate([
+            'status' => 'required|in:pending,in_progress,completed,cancelled',
+            'admin_notes' => 'nullable|string|max:1000',
+        ]);
 
-            // Record the previous status
-            $oldStatus = $serviceRequest->status;
+        // Record the previous status
+        $oldStatus = $serviceRequest->status;
 
-            $serviceRequest->update($validated);
+        $serviceRequest->update($validated);
 
-            // Log status change
-            if ($oldStatus !== $validated['status']) {
-                activity()
-                    ->performedOn($serviceRequest)
-                    ->withProperties([
-                        'old_status' => $oldStatus,
-                        'new_status' => $validated['status']
-                    ])
-                    ->log('status_changed');
-            }
+        // Log status change
+        // if ($oldStatus !== $validated['status']) {
+        //     activity()
+        //         ->performedOn($serviceRequest)
+        //         ->withProperties([
+        //             'old_status' => $oldStatus,
+        //             'new_status' => $validated['status']
+        //         ])
+        //         ->log('status_changed');
+        // }
 
-            return redirect()
-                ->back()
-                ->with('success', 'Request updated successfully');
-        } catch (\Exception $e) {
-            Log::error('Error updating service request: ' . $e->getMessage());
-            return back()
-                ->withInput()
-                ->with('error', 'Failed to update request. Please try again.');
-        }
+        return redirect()
+            ->back()
+            ->with('success', 'Request updated successfully');
+        // } catch (\Exception $e) {
+        //     Log::error('Error updating service request: ' . $e->getMessage());
+        //     return back()
+        //         ->withInput()
+        //         ->with('error', 'Failed to update request. Please try again.');
+        // }
     }
 
     public function destroy(ServiceRequest $request)

@@ -21,6 +21,7 @@ class CreateServiceRequestsTable extends Migration
             $table->text('description');
             $table->json('attachments')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');
+            $table->text('admin_notes')->nullable();
             $table->timestamps();
         });
     }

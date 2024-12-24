@@ -25,7 +25,7 @@
                             class="ml-2 px-3 py-1 rounded-full text-sm font-medium
                         {{ $request->status === 'completed'
                             ? 'bg-green-100 text-green-800'
-                            : ($request->status === 'processing'
+                            : ($request->status === 'in_progress'
                                 ? 'bg-blue-100 text-blue-800'
                                 : ($request->status === 'cancelled'
                                     ? 'bg-red-100 text-red-800'
@@ -113,21 +113,36 @@
                     <!-- Update Status Form -->
                     <div class="col-span-full">
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">Update Status</h2>
+
+                        @if ($errors->any())
+                            <div class="mb-4 bg-red-50 text-red-600 p-4 rounded-lg">
+                                <ul class="list-disc list-inside">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form action="{{ route('admin.requests.update', $request) }}" method="POST"
                             class="bg-gray-50 rounded-lg p-4">
                             @csrf
                             @method('PUT')
+
+                            <!-- Debug info - remove in production -->
+                            <input type="hidden" name="debug_id" value="{{ $request->id }}">
+
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div class="col-span-2">
                                     <select name="status"
                                         class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-                                        <option value="pending" {{ $request->status == 'pending' ? 'selected' : '' }}>
+                                        <option value="pending" {{ $request->status === 'pending' ? 'selected' : '' }}>
                                             Pending</option>
-                                        <option value="processing"
-                                            {{ $request->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                                        <option value="completed" {{ $request->status == 'completed' ? 'selected' : '' }}>
+                                        <option value="in_progress"
+                                            {{ $request->status === 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                                        <option value="completed" {{ $request->status === 'completed' ? 'selected' : '' }}>
                                             Completed</option>
-                                        <option value="cancelled" {{ $request->status == 'cancelled' ? 'selected' : '' }}>
+                                        <option value="cancelled" {{ $request->status === 'cancelled' ? 'selected' : '' }}>
                                             Cancelled</option>
                                     </select>
                                 </div>
@@ -137,6 +152,11 @@
                                         Update Status
                                     </button>
                                 </div>
+                            </div>
+
+                            <!-- Current Status Debug - remove in production -->
+                            <div class="mt-2 text-xs text-gray-500">
+                                Current status: {{ $request->status }}
                             </div>
 
                             <!-- Admin Notes -->
