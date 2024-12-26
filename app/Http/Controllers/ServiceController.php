@@ -59,11 +59,14 @@ class ServiceController extends Controller
             DB::beginTransaction();
 
             $attachments = [];
+
             // Handle file uploads
             if ($request->hasFile('attachments')) {
                 foreach ($request->file('attachments') as $file) {
+
                     // Generate unique filename
                     $filename = uniqid() . '_' . $file->getClientOriginalName();
+
                     // Store in the public disk
                     $path = $file->storeAs('attachments', $filename, 'public');
                     $attachments[] = [
@@ -84,13 +87,23 @@ class ServiceController extends Controller
                 'status' => 'pending'
             ]);
 
+            $service = Service::findOrFail($validated['service_id']);
+
             DB::commit();
 
             // Send notification email (you'll need to implement this)
             // event(new ServiceRequestSubmitted($serviceRequest));
 
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Your request has been submitted successfully. We will contact you soon.',
+                    'redirect' => route('services.show', $service)
+                ]);
+            }
+
             return redirect()
-                ->route('services.show', $request->service_id)
+                ->route('services.show', $service)
                 ->with('success', 'Your request has been submitted successfully. We will contact you soon.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -100,6 +113,13 @@ class ServiceController extends Controller
                 foreach ($attachments as $attachment) {
                     Storage::disk('public')->delete($attachment['path']);
                 }
+            }
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'There was an error submitting your request. Please try again.'
+                ], 422);
             }
 
             return back()

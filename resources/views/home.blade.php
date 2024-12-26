@@ -117,7 +117,7 @@
                             </div>
                             <div>
                                 <p class="font-medium text-blue-800">Email</p>
-                                <p class="text-gray-600">iceitsol@gmail.com</p>
+                                <p class="text-gray-600">iceitsols@gmail.com</p>
                             </div>
                         </div>
 

@@ -32,10 +32,10 @@ class Service extends Model
         return $this->hasMany(ServiceRequest::class);
     }
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     protected static function boot()
     {

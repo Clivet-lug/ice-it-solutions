@@ -6,7 +6,8 @@
             <div class="bg-white rounded-lg shadow-lg p-8">
                 <h1 class="text-2xl font-bold text-gray-900 mb-8">Request {{ $service->name }}</h1>
 
-                <form action="{{ route('services.submit-request') }}" method="POST" enctype="multipart/form-data">
+                <form id="serviceRequestForm" action="{{ route('services.submit-request') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="service_id" value="{{ $service->id }}">
 
@@ -54,4 +55,68 @@
             </div>
         </div>
     </div>
+
+    {{-- JavaScript for the push alerts --}}
+    @push('scripts')
+        <script>
+            // Get the form element
+            const form = document.getElementById('serviceRequestForm');
+
+            // Add submit event listener
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Create FormData object
+                const formData = new FormData(this);
+
+                // Show loading alert
+                Swal.fire({
+                    title: 'Submitting Request...',
+                    text: 'Please wait while we process your request.',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Use fetch to submit the form
+                fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        credentials: 'same-origin'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: data.message,
+                                confirmButtonColor: '#3B82F6'
+                            }).then((result) => {
+                                // Redirect after user clicks OK
+                                window.location.href = data.redirect;
+                            });
+                        } else {
+                            throw new Error(data.message || 'Something went wrong');
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error.message || 'Something went wrong!',
+                            confirmButtonColor: '#3B82F6'
+                        });
+                    });
+            });
+
+            // Your existing file validation code remains the same
+        </script>
+    @endpush
 @endsection
