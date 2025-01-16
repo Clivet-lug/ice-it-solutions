@@ -45,8 +45,8 @@ COPY . .
 RUN composer install --no-interaction --no-dev --prefer-dist
 
 # Install npm dependencies and compile assets
-RUN npm install
-RUN npm run prod
+# RUN npm install
+# RUN npm run prod
 
 # Change ownership
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
