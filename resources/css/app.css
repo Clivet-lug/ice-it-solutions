@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Hero background container */
+.hero-section {
+    @apply relative w-full min-h-screen overflow-hidden;
+}
+
+/* Background image styling */
+.hero-background {
+    @apply absolute inset-0 w-full h-full;
+}
+
+.hero-background img {
+    @apply w-full h-full object-cover object-center;
+    /* This ensures the image covers the container while maintaining aspect ratio */
+}
+
+/* Optional overlay for better text readability */
+.hero-overlay {
+    @apply absolute inset-0 bg-black/30;
+    /* Adjust opacity as needed */
+}
