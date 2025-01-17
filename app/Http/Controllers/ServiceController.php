@@ -5,19 +5,53 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\ServiceRequest;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
+
     public function index()
     {
-        // Get active services with pagination
-        $services = Service::where('is_active', true)
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
+        try {
+            Log::info('Attempting to load services index page');
 
-        return view('services.index', compact('services'));
+            // Explicitly check if Service model exists
+            if (!class_exists('App\Models\Service')) {
+                Log::error('Service model not found');
+                throw new \Exception('Service model not found');
+            }
+
+            // Get active services with pagination
+            $services = Service::where('is_active', true)
+                ->select('id', 'name', 'short_description', 'price', 'features', 'image')
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+
+            Log::info('Services loaded successfully', [
+                'count' => $services->count(),
+                'total' => $services->total()
+            ]);
+
+            // Check if features are properly formatted
+            $services->each(function ($service) {
+                if (!is_array($service->features)) {
+                    $service->features = json_decode($service->features, true) ?? [];
+                }
+            });
+
+            return view('services.index', compact('services'));
+        } catch (\Exception $e) {
+            Log::error('Error in ServiceController@index: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            // Since APP_DEBUG is true, this will show detailed error
+            throw $e;
+        }
     }
 
     public function show(Service $service)
