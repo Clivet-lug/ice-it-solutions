@@ -40,7 +40,7 @@
                             <div class="flex justify-between items-center mt-6">
                                 <span class="text-blue-600 font-bold">Starting at
                                     K{{ number_format($service->price, 2) }}</span>
-                                <a href="{{ route('services.show', $service) }}"
+                                <a href="{{ route('services.show', ['service' => $service->slug]) }}"
                                     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                                     View Details
                                 </a>

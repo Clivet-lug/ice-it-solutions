@@ -66,16 +66,16 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => parse_url(env('DATABASE_URL'), PHP_URL_HOST),
-            'port' => parse_url(env('DATABASE_URL'), PHP_URL_PORT),
-            'database' => ltrim(parse_url(env('DATABASE_URL'), PHP_URL_PATH), '/'),
-            'username' => parse_url(env('DATABASE_URL'), PHP_URL_USER),
-            'password' => parse_url(env('DATABASE_URL'), PHP_URL_PASS),
+            'host' => env('DB_HOST', '127.0.0.1'),  // Changed this line
+            'port' => env('DB_PORT', '5432'),       // Changed this line
+            'database' => env('DB_DATABASE', 'forge'), // Changed this line
+            'username' => env('DB_USERNAME', 'forge'), // Changed this line
+            'password' => env('DB_PASSWORD', ''),    // Changed this line
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
-            'sslmode' => 'require', // Changed from 'prefer' to 'require'
+            'sslmode' => 'prefer',  // Changed back to 'prefer' for local development
         ],
 
         'sqlsrv' => [

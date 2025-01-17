@@ -15,14 +15,14 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 
 // Public Routes
 
-Route::get('/services', function () {
-    try {
-        return view('services');
-    } catch (\Exception $e) {
-        Log::error($e->getMessage());
-        throw $e;
-    }
-});
+// Route::get('/services', function () {
+//     try {
+//         return view('services');
+//     } catch (\Exception $e) {
+//         Log::error($e->getMessage());
+//         throw $e;
+//     }
+// });
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,7 +35,7 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Service routes
-Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+Route::get('/services/{service:slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/services/{service}/request', [ServiceController::class, 'request'])->name('services.request');
 Route::post('/services/submit-request', [ServiceController::class, 'submitRequest'])->name('services.submit-request');
 
