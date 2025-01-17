@@ -54,5 +54,6 @@
                 @endforelse
             </div>
         </div>
+        {{ $services->links() }}
     </div>
 @endsection

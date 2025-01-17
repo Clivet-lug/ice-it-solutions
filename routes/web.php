@@ -1,18 +1,28 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PricingController;
-use App\Http\Controllers\Admin\AdminPricingController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\AdminPricingController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
 // Public Routes
+
+Route::get('/services', function () {
+    try {
+        return view('services');
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        throw $e;
+    }
+});
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
