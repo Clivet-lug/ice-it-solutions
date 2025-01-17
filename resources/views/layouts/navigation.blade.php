@@ -63,31 +63,32 @@
 
     <!-- Mobile Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="md:hidden">
-        <div class="pt-2 pb-3 space-y-1 bg-white shadow-lg">
+        <div class="pt-2 pb-3 space-y-1 bg-[#5B89AF]/95 backdrop-blur-sm">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')"
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                 {{ __('Home') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')"
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                 {{ __('Services') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('pricing.index')" :active="request()->routeIs('pricing.*')"
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                 {{ __('Pricing') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('portfolio.index')" :active="request()->routeIs('portfolio.*')"
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                 {{ __('Portfolio') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')"
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                 {{ __('Contact') }}
             </x-responsive-nav-link>
 
             @auth
                 @if (auth()->user()->is_admin)
-                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')"
+                        class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                         {{ __('Admin') }}
                     </x-responsive-nav-link>
                 @endif
@@ -96,10 +97,10 @@
 
         <!-- Mobile Auth Menu -->
         @auth
-            <div class="pt-4 pb-1 border-t border-gray-200 bg-white">
+            <div class="pt-4 pb-1 border-t border-blue-400/30 bg-[#5B89AF]/95 backdrop-blur-sm">
                 <div class="px-4">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-blue-100">{{ Auth::user()->email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">
@@ -107,20 +108,22 @@
                         @csrf
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                            this.closest('form').submit();"
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                        this.closest('form').submit();"
+                            class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>
             </div>
         @else
-            <div class="pt-4 pb-1 border-t border-gray-200 bg-white">
+            <div class="pt-4 pb-1 border-t border-blue-400/30 bg-[#5B89AF]/95 backdrop-blur-sm">
                 <div class="space-y-1">
-                    <x-responsive-nav-link :href="route('login')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <x-responsive-nav-link :href="route('login')"
+                        class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                         {{ __('Log In') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('register')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <x-responsive-nav-link :href="route('register')"
+                        class="block px-4 py-2 text-white hover:bg-blue-700/50 transition duration-300">
                         {{ __('Register') }}
                     </x-responsive-nav-link>
                 </div>
