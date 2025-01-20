@@ -13,16 +13,6 @@ use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
-// Public Routes
-
-// Route::get('/services', function () {
-//     try {
-//         return view('services');
-//     } catch (\Exception $e) {
-//         Log::error($e->getMessage());
-//         throw $e;
-//     }
-// });
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
