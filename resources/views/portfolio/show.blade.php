@@ -1,81 +1,122 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-7xl mx-auto py-16 px-4">
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <nav class="mb-8">
-                <a href="{{ route('portfolio.index') }}" class="text-blue-600 hover:text-blue-800">← Back to Portfolio</a>
+    <div class="bg-[#3B4BA6]/5 min-h-screen py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Back Navigation -->
+            <nav class="mb-12">
+                <a href="{{ route('portfolio.index') }}"
+                    class="inline-flex items-center text-[#3B4BA6] hover:translate-x-[-4px] transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Portfolio
+                </a>
             </nav>
 
-            <!-- Title Section -->
-            <div class="mb-8">
-                <span class="text-sm text-blue-600">{{ ucfirst($portfolio->type ?? 'Project') }}</span>
-                <h1 class="text-3xl font-bold mt-2">{{ $portfolio->title ?? 'Project Details' }}</h1>
-                @if (isset($portfolio->client_name))
-                    <p class="text-gray-600 mt-2">Client: {{ $portfolio->client_name }}</p>
-                @endif
-            </div>
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <!-- Hero Section -->
+                <div class="relative h-[40vh] bg-gray-900">
+                    @if (isset($portfolio->after_image))
+                        <img src="{{ Storage::url($portfolio->after_image) }}" alt="{{ $portfolio->title }}"
+                            class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent"></div>
+                    @endif
 
-            <!-- Images Section -->
-            <div class="mb-8">
-                @if (isset($portfolio->before_image) || isset($portfolio->after_image))
-                    <div class="grid md:grid-cols-2 gap-8">
-                        @if (isset($portfolio->before_image))
-                            <div>
-                                <h3 class="text-lg font-semibold mb-4">Before</h3>
-                                <img src="{{ Storage::url($portfolio->before_image) }}" alt="Before"
-                                    class="w-full rounded-lg shadow">
-                            </div>
-                        @endif
-                        @if (isset($portfolio->after_image))
-                            <div class="{{ !isset($portfolio->before_image) ? 'md:col-span-2' : '' }}">
-                                <h3 class="text-lg font-semibold mb-4">After</h3>
-                                <img src="{{ Storage::url($portfolio->after_image) }}" alt="After"
-                                    class="w-full rounded-lg shadow">
-                            </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                        <span
+                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                            {{ ucfirst($portfolio->type ?? 'Project') }}
+                        </span>
+                        <h1 class="text-4xl font-bold text-white mt-4">{{ $portfolio->title ?? 'Project Details' }}</h1>
+                        @if (isset($portfolio->client_name))
+                            <p class="text-white/80 mt-2">Client: {{ $portfolio->client_name }}</p>
                         @endif
                     </div>
-                @endif
-            </div>
-
-            <!-- Description -->
-            @if (isset($portfolio->description))
-                <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-4">Project Description</h3>
-                    <p class="text-gray-600">{{ $portfolio->description }}</p>
                 </div>
-            @endif
 
-            <!-- Technologies -->
-            @if (isset($portfolio->technologies) && is_array($portfolio->technologies) && count($portfolio->technologies) > 0)
-                <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-4">Technologies Used</h3>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach ($portfolio->technologies as $tech)
-                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
-                                {{ $tech }}
-                            </span>
-                        @endforeach
+                <div class="p-8">
+                    <!-- Images Section with Before/After Comparison -->
+                    @if (isset($portfolio->before_image) && isset($portfolio->after_image))
+                        <div class="mb-12">
+                            <h3 class="text-xl font-bold mb-6">Project Transformation</h3>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="space-y-4">
+                                    <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                                        <img src="{{ Storage::url($portfolio->before_image) }}" alt="Before"
+                                            class="w-full h-full object-cover">
+                                        <div
+                                            class="absolute top-4 left-4 px-3 py-1 bg-black/50 text-white text-sm rounded-full backdrop-blur-sm">
+                                            Before
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                                        <img src="{{ Storage::url($portfolio->after_image) }}" alt="After"
+                                            class="w-full h-full object-cover">
+                                        <div
+                                            class="absolute top-4 left-4 px-3 py-1 bg-[#3B4BA6]/50 text-white text-sm rounded-full backdrop-blur-sm">
+                                            After
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Project Details -->
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <!-- Left Column: Description -->
+                        <div class="md:col-span-2 space-y-8">
+                            @if (isset($portfolio->description))
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4">Project Description</h3>
+                                    <p class="text-gray-600 leading-relaxed">{{ $portfolio->description }}</p>
+                                </div>
+                            @endif
+
+                            @if (isset($portfolio->results))
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4">Results & Impact</h3>
+                                    <p class="text-gray-600 leading-relaxed">{{ $portfolio->results }}</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Right Column: Technologies & CTA -->
+                        <div class="space-y-8">
+                            @if (isset($portfolio->technologies) && is_array($portfolio->technologies) && count($portfolio->technologies) > 0)
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4">Technologies Used</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach ($portfolio->technologies as $tech)
+                                            <span
+                                                class="px-3 py-1.5 bg-[#3B4BA6]/10 text-[#3B4BA6] rounded-full text-sm font-medium">
+                                                {{ $tech }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            <!-- Enhanced CTA Section -->
+                            <div class="bg-[#3B4BA6]/5 rounded-2xl p-6 border border-[#3B4BA6]/10">
+                                <h3 class="text-xl font-bold mb-3">Interested in something similar?</h3>
+                                <p class="text-gray-600 mb-6">Let's discuss your project requirements and create something
+                                    amazing together.</p>
+                                <a href="{{ route('contact') }}"
+                                    class="inline-flex items-center justify-center w-full px-6 py-3 bg-[#3B4BA6] text-white rounded-xl hover:bg-[#2D3A8C] transition-colors duration-300">
+                                    Get in Touch
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            @endif
-
-            <!-- Results -->
-            @if (isset($portfolio->results))
-                <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-4">Results & Impact</h3>
-                    <p class="text-gray-600">{{ $portfolio->results }}</p>
-                </div>
-            @endif
-
-            <!-- CTA Section -->
-            <div class="bg-gray-50 rounded-lg p-6 mt-8">
-                <h3 class="text-xl font-semibold mb-2">Interested in something similar?</h3>
-                <p class="text-gray-600 mb-4">Let's discuss your project requirements.</p>
-                <a href="{{ route('contact') }}"
-                    class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    Get in Touch
-                </a>
             </div>
         </div>
     </div>

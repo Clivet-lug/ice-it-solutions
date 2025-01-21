@@ -1,36 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-white">
-        <!-- Featured Projects -->
-        <div class="max-w-7xl mx-auto py-16 px-4">
-            <h2 class="text-3xl font-bold mb-8">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-[#3B4BA6]/5">
+        <!-- Featured Projects Section -->
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900">Featured Projects</h2>
+                <div class="w-20 h-1 bg-[#3B4BA6] mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($featured as $project)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                        <img src="{{ asset($project->after_image) }}" alt="{{ $project->title }}"
-                            class="w-full h-48 object-cover">
+                    <div
+                        class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="{{ asset($project->after_image) }}" alt="{{ $project->title }}"
+                                class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+                        </div>
+
                         <div class="p-6">
-                            <span class="text-blue-600 text-sm font-semibold">{{ ucfirst($project->type) }}</span>
-                            <h3 class="text-xl font-bold mt-2">{{ $project->title }}</h3>
-                            <p class="text-gray-600 mt-2">{{ Str::limit($project->description, 100) }}</p>
-                            <a href="{{ route('portfolio.show', $project) }}" class="text-blue-600 mt-4 inline-block">View
-                                Project →</a>
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#3B4BA6]/10 text-[#3B4BA6]">
+                                {{ ucfirst($project->type) }}
+                            </span>
+                            <h3 class="text-xl font-bold mt-3 text-gray-900">{{ $project->title }}</h3>
+                            <p
+                                class="text-gray-600 mt-2 text-sm line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+                                {{ $project->description }}
+                            </p>
+                            <a href="{{ route('portfolio.show', $project) }}"
+                                class="inline-flex items-center text-[#3B4BA6] font-medium mt-4 group-hover:translate-x-2 transition-transform duration-300">
+                                View Project
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
 
-        <!-- Filter -->
-        <div class="bg-gray-100 py-8">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex gap-4">
+        <!-- Enhanced Filter Section -->
+        <div class="border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex flex-wrap justify-center gap-4">
                     <a href="{{ route('portfolio.index') }}"
-                        class="px-4 py-2 rounded {{ !request('type') ? 'bg-blue-600 text-white' : 'bg-white' }}">All</a>
+                        class="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ !request('type')
+                            ? 'bg-[#3B4BA6] text-white ring-2 ring-[#3B4BA6] ring-offset-2'
+                            : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200' }}">
+                        All Projects
+                    </a>
                     @foreach (['website', 'software', 'document', 'presentation'] as $type)
                         <a href="{{ route('portfolio.index', ['type' => $type]) }}"
-                            class="px-4 py-2 rounded {{ request('type') === $type ? 'bg-blue-600 text-white' : 'bg-white' }}">
+                            class="px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                            {{ request('type') === $type
+                                ? 'bg-[#3B4BA6] text-white ring-2 ring-[#3B4BA6] ring-offset-2'
+                                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200' }}">
                             {{ ucfirst($type) }}
                         </a>
                     @endforeach
@@ -38,39 +69,63 @@
             </div>
         </div>
 
-        <!-- All Projects -->
-        <div class="max-w-7xl mx-auto py-16 px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- All Projects Section -->
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($portfolios as $project)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div class="relative">
+                    <div
+                        class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                        <div class="relative aspect-video overflow-hidden">
                             <img src="{{ asset($project->after_image) }}" alt="{{ $project->title }}"
-                                class="w-full h-48 object-cover">
+                                class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+
                             @if ($project->before_image)
                                 <div
-                                    class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <img src="{{ asset($project->before_image) }}" alt="Before" class="max-h-full">
+                                    class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <img src="{{ asset($project->before_image) }}" alt="Before"
+                                        class="max-h-[80%] max-w-[80%] object-contain rounded shadow-lg">
                                 </div>
                             @endif
                         </div>
+
                         <div class="p-6">
-                            <span class="text-blue-600 text-sm font-semibold">{{ ucfirst($project->type) }}</span>
-                            <h3 class="text-xl font-bold mt-2">{{ $project->title }}</h3>
-                            <p class="text-gray-600 mt-2">{{ Str::limit($project->description, 100) }}</p>
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#3B4BA6]/10 text-[#3B4BA6]">
+                                {{ ucfirst($project->type) }}
+                            </span>
+                            <h3 class="text-xl font-bold mt-3 text-gray-900">{{ $project->title }}</h3>
+                            <p
+                                class="text-gray-600 mt-2 text-sm line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+                                {{ $project->description }}
+                            </p>
+
                             @if ($project->technologies)
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     @foreach ($project->technologies as $tech)
-                                        <span class="px-2 py-1 bg-gray-100 rounded-full text-sm">{{ $tech }}</span>
+                                        <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600">
+                                            {{ $tech }}
+                                        </span>
                                     @endforeach
                                 </div>
                             @endif
-                            <a href="{{ route('portfolio.show', $project) }}" class="text-blue-600 mt-4 inline-block">View
-                                Project →</a>
+
+                            <a href="{{ route('portfolio.show', $project) }}"
+                                class="inline-flex items-center text-[#3B4BA6] font-medium mt-4 group-hover:translate-x-2 transition-transform duration-300">
+                                View Project
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 @endforeach
             </div>
-            {{ $portfolios->links() }}
+
+            <!-- Pagination with brand colors -->
+            <div class="mt-12">
+                {{ $portfolios->links() }}
+            </div>
         </div>
     </div>
 @endsection

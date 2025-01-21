@@ -91,7 +91,7 @@
                             <div class="p-8">
                                 <!-- Enhanced Plan Icon -->
                                 <div
-                                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-[#3B4BA6]/10 flex items-center justify-center transition-all duration-300">
+                                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-[#3B4BA6]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     @if (strtolower($plan->type) === 'website')
                                         <svg class="w-8 h-8 text-[#3B4BA6]" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
