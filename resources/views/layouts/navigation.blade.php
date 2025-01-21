@@ -65,71 +65,87 @@
 
     <!-- Mobile Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="md:hidden">
-        <div class="pt-2 pb-3 space-y-1 bg-[#4052B5]/95 backdrop-blur-sm">
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')"
-                class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')"
-                class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                {{ __('Services') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('pricing.index')" :active="request()->routeIs('pricing.*')"
-                class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                {{ __('Pricing') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('portfolio.index')" :active="request()->routeIs('portfolio.*')"
-                class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                {{ __('Portfolio') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')"
-                class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                {{ __('Contact') }}
-            </x-responsive-nav-link>
+        <!-- Top Navigation -->
+        {{-- <div class="relative bg-[#3B4BA6] pb-3">
+            <div class="flex justify-between items-center p-4">
+                <a href="{{ route('home') }}" class="block">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="ICE IT Solutions"
+                        class="h-12 w-auto object-contain">
+                </a>
+                <button @click="open = false" class="p-2 text-white hover:bg-white/10 rounded-full transition-colors">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div> --}}
 
-            @auth
-                @if (auth()->user()->is_admin)
-                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')"
-                        class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                        {{ __('Admin') }}
-                    </x-responsive-nav-link>
-                @endif
-            @endauth
-        </div>
+        <!-- Navigation Links -->
+        <div class="bg-[#3B4BA6]">
+            <div class="px-4 py-2">
+                <a href="{{ route('home') }}"
+                    class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
+                    {{ request()->routeIs('home') ? 'bg-white/10' : '' }}">
+                    Home
+                </a>
+                <a href="{{ route('services') }}"
+                    class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
+                    {{ request()->routeIs('services') ? 'bg-white/10' : '' }}">
+                    Services
+                </a>
+                <a href="{{ route('pricing.index') }}"
+                    class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
+                    {{ request()->routeIs('pricing.*') ? 'bg-white/10' : '' }}">
+                    Pricing
+                </a>
+                <a href="{{ route('portfolio.index') }}"
+                    class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
+                    {{ request()->routeIs('portfolio.*') ? 'bg-white/10' : '' }}">
+                    Portfolio
+                </a>
+                <a href="#"
+                    class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
+                    {{ request()->routeIs('resources') ? 'bg-white/10' : '' }}">
+                    Resources
+                </a>
+            </div>
 
-        <!-- Mobile Auth Menu -->
-        @auth
-            <div class="pt-4 pb-1 border-t border-blue-400/30 bg-[#5B89AF]/95 backdrop-blur-sm">
-                <div class="px-4">
-                    <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-blue-100">{{ Auth::user()->email }}</div>
-                </div>
+            <!-- Auth Links -->
+            <div class="border-t border-white/10 px-4 py-3">
+                @auth
+                    @if (auth()->user()->is_admin)
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors">
+                            Admin Dashboard
+                        </a>
+                    @endif
 
-                <div class="mt-3 space-y-1">
-                    <form method="POST" action="{{ route('logout') }}">
+                    <div class="px-4 py-2">
+                        <div class="text-white">{{ Auth::user()->name }}</div>
+                        <div class="text-sm text-white/70">{{ Auth::user()->email }}</div>
+                    </div>
+
+                    <form method="POST" action="{{ route('logout') }}" class="mt-2">
                         @csrf
-                        <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                        this.closest('form').submit();"
-                            class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
+                        <button type="submit"
+                            class="w-full px-4 py-3 text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-center">
+                            Logout
+                        </button>
                     </form>
-                </div>
+                @else
+                    <div class="space-y-2">
+                        <a href="{{ route('login') }}"
+                            class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors text-center">
+                            Log In
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="block px-4 py-3 bg-white text-[#3B4BA6] hover:bg-gray-100 rounded-lg transition-colors text-center">
+                            Get Started
+                        </a>
+                    </div>
+                @endauth
             </div>
-        @else
-            <div class="pt-4 pb-1 border-t border-blue-400/30 bg-[#5B89AF]/95 backdrop-blur-sm">
-                <div class="space-y-1">
-                    <x-responsive-nav-link :href="route('login')"
-                        class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                        {{ __('Log In') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('register')"
-                        class="block px-4 py-2 text-white hover:bg-white/10 transition duration-300">
-                        {{ __('Register') }}
-                    </x-responsive-nav-link>
-                </div>
-            </div>
-        @endauth
+        </div>
     </div>
 </nav>
