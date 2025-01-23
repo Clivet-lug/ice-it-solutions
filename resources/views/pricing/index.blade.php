@@ -194,5 +194,21 @@
                 </dl>
             </div>
         </div>
+
+    </div>
+    <!-- Contact Support Section -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Need More Information?</h3>
+            <p class="text-gray-600 mb-6">Our team is here to answer any questions you might have about this
+                service</p>
+            <a href="{{ route('contact') }}"
+                class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                Contact Support
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </a>
+        </div>
     </div>
 @endsection
