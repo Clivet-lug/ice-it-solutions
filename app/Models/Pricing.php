@@ -24,4 +24,9 @@ class Pricing extends Model
         'is_active' => 'boolean',
         'features' => 'array'
     ];
+
+    public function requests()
+    {
+        return $this->hasMany(PricingRequest::class);
+    }
 }

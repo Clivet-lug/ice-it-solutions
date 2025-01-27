@@ -7,11 +7,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PricingRequestController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\AdminPricingController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminPricingRequestController;
 
 
 // Home
@@ -35,6 +37,10 @@ Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name
 
 // Pricing routes
 Route::get('/pricing', [App\Http\Controllers\PricingController::class, 'index'])->name('pricing.index');
+
+// Pricing Request routes
+Route::get('/pricing/{pricing}/request', [PricingRequestController::class, 'create'])->name('pricing.request');
+Route::post('/pricing/submit-request', [PricingRequestController::class, 'store'])->name('pricing.submit-request');
 
 
 // Authentication Routes (provided by Laravel Breeze)
@@ -66,4 +72,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Pricing
     Route::resource('pricing', AdminPricingController::class);
+
+    // Pricing Request routes
+    Route::get('/pricing-requests', [AdminPricingRequestController::class, 'index'])->name('pricing-requests.index');
+    Route::get('/pricing-requests/{request}', [AdminPricingRequestController::class, 'show'])->name('pricing-requests.show');
+    Route::patch('/pricing-requests/{request}/status', [AdminPricingRequestController::class, 'updateStatus'])->name('pricing-requests.update-status');
 });

@@ -164,11 +164,9 @@
 
                             <!-- Enhanced Action Button -->
                             <div class="p-8 bg-gray-50 border-t border-gray-100">
-                                <a href="{{ route('contact') }}"
+                                <a href="{{ route('pricing.request', $plan) }}"
                                     class="block w-full py-3 px-6 text-center font-medium rounded-xl transition-all duration-300 transform hover:-translate-y-0.5
-                                    {{ $plan->is_featured
-                                        ? 'bg-[#3B4BA6] text-white hover:bg-[#2D3A8C]'
-                                        : 'bg-white text-[#3B4BA6] border border-[#3B4BA6] hover:bg-[#3B4BA6] hover:text-white' }}">
+    {{ $plan->is_featured ? 'bg-[#3B4BA6] text-white hover:bg-[#2D3A8C]' : 'bg-white text-[#3B4BA6] border border-[#3B4BA6] hover:bg-[#3B4BA6] hover:text-white' }}">
                                     {{ $plan->button_text ?? 'Get Started' }}
                                 </a>
                             </div>
