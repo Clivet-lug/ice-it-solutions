@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pricing;
-use App\Models\PricingRequest;
+use App\Helpers\EmailHelper;
 use Illuminate\Http\Request;
+use App\Models\PricingRequest;
 
 class PricingRequestController extends Controller
 {
@@ -24,7 +25,10 @@ class PricingRequestController extends Controller
                 'requirements' => 'nullable|array'
             ]);
 
-            PricingRequest::create($validated);
+            $pricingRequest = PricingRequest::create($validated);
+
+            // Send confirmation email
+            EmailHelper::sendRequestConfirmation($pricingRequest, 'pricing');
 
             if ($request->ajax()) {
                 return response()->json([

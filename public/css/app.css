@@ -744,6 +744,9 @@ select {
 .pointer-events-none {
   pointer-events: none;
 }
+.collapse {
+  visibility: collapse;
+}
 .absolute {
   position: absolute;
 }
@@ -823,9 +826,6 @@ select {
 }
 .-mr-1 {
   margin-right: -0.25rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 .mb-12 {
   margin-bottom: 3rem;
@@ -1066,6 +1066,9 @@ select {
 }
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+.border-collapse {
+  border-collapse: collapse;
 }
 .origin-top {
   transform-origin: top;

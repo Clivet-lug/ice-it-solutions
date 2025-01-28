@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Helpers\EmailHelper;
 use App\Models\ServiceRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -105,6 +106,8 @@ class ServiceController extends Controller
             ]);
 
             $service = Service::findOrFail($validated['service_id']);
+
+            EmailHelper::sendRequestConfirmation($serviceRequest, 'service');
 
             DB::commit();
 
