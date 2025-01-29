@@ -25,9 +25,9 @@
     <div class="info-box">
         <h3>Quick Links:</h3>
         <ul>
-            <li><a href="{{ route('services') }}">Our Services</a></li>
-            <li><a href="{{ route('portfolio.index') }}">Portfolio</a></li>
-            <li><a href="{{ route('contact') }}">Contact Us</a></li>
+            <li><a href="https://ice-it-solutions-production.up.railway.app/services">Our Services</a></li>
+            <li><a href="https://ice-it-solutions-production.up.railway.app/portfolio">Portfolio</a></li>
+            <li><a href="https://ice-it-solutions-production.up.railway.app/contact">Contact Us</a></li>
         </ul>
     </div>
 

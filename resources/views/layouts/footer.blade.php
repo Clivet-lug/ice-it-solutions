@@ -85,7 +85,7 @@
                             </svg>
                             Instagram
                     </li>
-                    <li><a href="https://facebook.com/your_page" target="_blank" rel="noopener noreferrer"
+                    <li><a href="https://web.facebook.com/share/p/19Uw4HxYk2/" target="_blank" rel="noopener noreferrer"
                             class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center justify-center md:justify-start">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -93,7 +93,7 @@
                             </svg>
                             Facebook
                     </li>
-                    <li><a href="https://wa.me/your_number" target="_blank" rel="noopener noreferrer"
+                    <li><a href="https://wa.me/0974323234" target="_blank" rel="noopener noreferrer"
                             class="text-gray-300 hover:text-white transition-colors duration-200 flex items-center justify-center md:justify-start">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path
