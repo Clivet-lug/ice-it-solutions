@@ -784,6 +784,9 @@ select {
 .top-0 {
   top: 0px;
 }
+.top-16 {
+  top: 4rem;
+}
 .top-4 {
   top: 1rem;
 }
@@ -1260,6 +1263,9 @@ select {
 .overflow-x-auto {
   overflow-x: auto;
 }
+.overflow-y-auto {
+  overflow-y: auto;
+}
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1664,9 +1670,6 @@ select {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-.pb-3 {
-  padding-bottom: 0.75rem;
 }
 .pb-8 {
   padding-bottom: 2rem;
@@ -2613,6 +2616,14 @@ select {
     display: none;
   }
 
+  .md\:h-12 {
+    height: 3rem;
+  }
+
+  .md\:h-20 {
+    height: 5rem;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -2645,6 +2656,11 @@ select {
     padding: 3rem;
   }
 
+  .md\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
   .md\:text-left {
     text-align: left;
   }
@@ -2652,6 +2668,11 @@ select {
   .md\:text-5xl {
     font-size: 3rem;
     line-height: 1;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 @media (min-width: 1024px) {

@@ -1,12 +1,13 @@
 <nav x-data="{ open: false }"
-    class="absolute top-0 left-0 right-0 z-50 {{ !request()->routeIs('home') ? 'bg-[#3B4BA6] shadow-lg backdrop-blur-sm bg-opacity-95' : 'bg-transparent' }}">
+    class="absolute top-0 left-0 right-0 z-50 transition-all duration-300 {{ !request()->routeIs('home') ? 'bg-[#3B4BA6] shadow-lg backdrop-blur-sm bg-opacity-95' : 'bg-transparent' }}">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
+        <div class="flex justify-between items-center h-16 md:h-20">
             <!-- Left Side: Logo -->
             <div class="flex-shrink-0">
                 <a href="{{ route('home') }}" class="block">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="ICE IT Solutions" class="h-12 w-auto object-contain">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="ICE IT Solutions"
+                        class="h-8 md:h-12 w-auto object-contain transition-all duration-300">
                 </a>
             </div>
 
@@ -51,7 +52,8 @@
             <!-- Mobile menu button -->
             <div class="flex md:hidden">
                 <button @click="open = !open"
-                    class="inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none transition duration-300">
+                    class="inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none transition duration-300"
+                    aria-label="Toggle menu">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -64,49 +66,34 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="md:hidden">
-        <!-- Top Navigation -->
-        {{-- <div class="relative bg-[#3B4BA6] pb-3">
-            <div class="flex justify-between items-center p-4">
-                <a href="{{ route('home') }}" class="block">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="ICE IT Solutions"
-                        class="h-12 w-auto object-contain">
-                </a>
-                <button @click="open = false" class="p-2 text-white hover:bg-white/10 rounded-full transition-colors">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div> --}}
-
+    <div :class="{ 'block': open, 'hidden': !open }" {{-- class="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-[#3B4BA6] overflow-y-auto transition-transform duration-300"
+        @click.away="open = false"> --}}>
         <!-- Navigation Links -->
         <div class="bg-[#3B4BA6]">
             <div class="px-4 py-2">
                 <a href="{{ route('home') }}"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                    {{ request()->routeIs('home') ? 'bg-white/10' : '' }}">
+                {{ request()->routeIs('home') ? 'bg-white/10' : '' }}">
                     Home
                 </a>
                 <a href="{{ route('services') }}"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                    {{ request()->routeIs('services') ? 'bg-white/10' : '' }}">
+                {{ request()->routeIs('services') ? 'bg-white/10' : '' }}">
                     Services
                 </a>
                 <a href="{{ route('pricing.index') }}"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                    {{ request()->routeIs('pricing.*') ? 'bg-white/10' : '' }}">
+                {{ request()->routeIs('pricing.*') ? 'bg-white/10' : '' }}">
                     Pricing
                 </a>
                 <a href="{{ route('portfolio.index') }}"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                    {{ request()->routeIs('portfolio.*') ? 'bg-white/10' : '' }}">
+                {{ request()->routeIs('portfolio.*') ? 'bg-white/10' : '' }}">
                     Portfolio
                 </a>
                 <a href="#"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                    {{ request()->routeIs('resources') ? 'bg-white/10' : '' }}">
+                {{ request()->routeIs('resources') ? 'bg-white/10' : '' }}">
                     Resources
                 </a>
             </div>
