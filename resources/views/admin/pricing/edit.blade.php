@@ -3,12 +3,17 @@
 
 @section('content')
     <div class="max-w-4xl mx-auto px-4 py-8">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold">Edit Pricing Plan</h2>
-            <a href="{{ route('admin.pricing.index') }}" class="text-blue-600 hover:text-blue-800">← Back to Pricing</a>
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+            <h2 class="text-xl sm:text-2xl font-bold">Edit Pricing Plan</h2>
+            <a href="{{ route('admin.pricing.index') }}" class="text-blue-600 hover:text-blue-800 inline-flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Pricing
+            </a>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-white rounded-lg shadow p-4 sm:p-6">
             <form action="{{ route('admin.pricing.update', $pricing) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -61,8 +66,13 @@
                             </div>
                         @endforeach
                     </div>
-                    <button type="button" onclick="addFeature()" class="mt-2 text-sm text-blue-600 hover:text-blue-800">+
-                        Add Feature</button>
+                    <button type="button" onclick="addFeature()"
+                        class="mt-2 text-sm text-blue-600 hover:text-blue-800 inline-flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add Feature
+                    </button>
                 </div>
 
                 <!-- Button Text -->
@@ -73,7 +83,7 @@
                 </div>
 
                 <!-- Checkboxes -->
-                <div class="flex items-center gap-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="is_featured" value="1"
                             {{ $pricing->is_featured ? 'checked' : '' }}
@@ -89,12 +99,13 @@
                 </div>
 
                 <!-- Submit Buttons -->
-                <div class="flex justify-end gap-4">
+                <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
                     <a href="{{ route('admin.pricing.index') }}"
-                        class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md text-center text-gray-700 hover:bg-gray-50">
                         Cancel
                     </a>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    <button type="submit"
+                        class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                         Update Plan
                     </button>
                 </div>
@@ -109,12 +120,12 @@
                 const div = document.createElement('div');
                 div.className = 'flex gap-2';
                 div.innerHTML = `
-            <input type="text" name="features[]" 
-                   class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                   placeholder="Enter a feature">
-            <button type="button" onclick="removeFeature(this)"
-                    class="text-red-600 hover:text-red-800">Remove</button>
-        `;
+                    <input type="text" name="features[]" 
+                           class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                           placeholder="Enter a feature">
+                    <button type="button" onclick="removeFeature(this)"
+                            class="text-red-600 hover:text-red-800">Remove</button>
+                `;
                 container.appendChild(div);
             }
 

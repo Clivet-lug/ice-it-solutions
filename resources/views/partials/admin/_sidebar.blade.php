@@ -1,9 +1,10 @@
 <aside class="bg-blue-900 text-white w-64 min-h-screen">
-    <div class="p-6">
+    <div class="p-6 flex items-center">
+        <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-8 w-auto mr-3 hidden lg:block">
         <h1 class="text-2xl font-bold">Admin Panel</h1>
     </div>
 
-    <nav class="mt-6">
+    <nav class="mt-6 space-y-1">
         <a href="{{ route('admin.dashboard') }}"
             class="flex items-center px-6 py-3 hover:bg-blue-800 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-800' : '' }}">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

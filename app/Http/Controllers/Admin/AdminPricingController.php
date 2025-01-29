@@ -11,6 +11,9 @@ class AdminPricingController extends Controller
     public function index()
     {
         $pricings = Pricing::all();
+
+        $pricings = Pricing::paginate(10);
+
         return view('admin.pricing.index', compact('pricings'));
     }
 
