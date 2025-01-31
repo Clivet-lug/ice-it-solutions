@@ -57,25 +57,47 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="space-y-2">
                         <label class="block text-sm font-medium text-gray-700">Before Image</label>
-                        <input type="file" name="before_image" class="mt-1 block w-full text-sm">
-                        @if (isset($project) && $project->before_image)
-                            <div class="mt-2">
-                                <img src="{{ asset($project->before_image) }}"
-                                    class="h-24 w-full sm:w-auto object-cover rounded">
+                        <div id="beforeImageContainer"
+                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-400 transition-colors">
+                            <div class="space-y-1 text-center">
+                                <img id="beforePreview" src="{{ $project->before_image_url ?? '' }}"
+                                    class="{{ isset($project->before_image) ? '' : 'hidden' }} mb-3 max-h-32 mx-auto">
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="beforeImage"
+                                        class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                        <span>Upload a file</span>
+                                        <input id="beforeImage" name="before_image" type="file" class="sr-only"
+                                            accept="image/*">
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
                             </div>
-                        @endif
+                        </div>
+                        @error('before_image')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="space-y-2">
                         <label class="block text-sm font-medium text-gray-700">After Image (Required)</label>
-                        <input type="file" name="after_image" class="mt-1 block w-full text-sm"
-                            {{ isset($project) ? '' : 'required' }}>
-                        @if (isset($project) && $project->after_image)
-                            <div class="mt-2">
-                                <img src="{{ asset($project->after_image) }}"
-                                    class="h-24 w-full sm:w-auto object-cover rounded">
+                        <div id="afterImageContainer"
+                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-400 transition-colors">
+                            <div class="space-y-1 text-center">
+                                <img id="afterPreview" src="{{ $project->after_image_url ?? '' }}"
+                                    class="{{ isset($project->after_image) ? '' : 'hidden' }} mb-3 max-h-32 mx-auto">
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="afterImage"
+                                        class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                        <span>Upload a file</span>
+                                        <input id="afterImage" name="after_image" type="file" class="sr-only"
+                                            accept="image/*" {{ isset($project) ? '' : 'required' }}>
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
                             </div>
-                        @endif
+                        </div>
                         @error('after_image')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -127,4 +149,69 @@
             </form>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                function setupImagePreview(inputId, previewId) {
+                    const input = document.getElementById(inputId);
+                    const preview = document.getElementById(previewId);
+                    const previewContainer = document.getElementById(previewId + 'Container');
+
+                    // Setup drag and drop
+                    previewContainer.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        this.classList.add('border-blue-500', 'bg-blue-50');
+                    });
+
+                    previewContainer.addEventListener('dragleave', function(e) {
+                        e.preventDefault();
+                        this.classList.remove('border-blue-500', 'bg-blue-50');
+                    });
+
+                    previewContainer.addEventListener('drop', function(e) {
+                        e.preventDefault();
+                        this.classList.remove('border-blue-500', 'bg-blue-50');
+
+                        if (e.dataTransfer.files.length) {
+                            input.files = e.dataTransfer.files;
+                            handleFileSelect(input.files[0]);
+                        }
+                    });
+
+                    // Handle file selection
+                    input.addEventListener('change', function(e) {
+                        if (this.files.length) {
+                            handleFileSelect(this.files[0]);
+                        }
+                    });
+
+                    function handleFileSelect(file) {
+                        // Validate file type
+                        if (!file.type.startsWith('image/')) {
+                            alert('Please select an image file');
+                            return;
+                        }
+
+                        // Validate file size (5MB max)
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('File size should not exceed 5MB');
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+
+                // Initialize for both before and after images
+                setupImagePreview('beforeImage', 'beforePreview');
+                setupImagePreview('afterImage', 'afterPreview');
+            });
+        </script>
+    @endpush
 @endsection

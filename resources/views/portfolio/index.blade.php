@@ -14,7 +14,7 @@
                     <div
                         class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
                         <div class="relative aspect-video overflow-hidden">
-                            <img src="{{ asset($project->after_image) }}" alt="{{ $project->title }}"
+                            <img src="{{ $project->after_image_url }}" alt="{{ $project->title }}"
                                 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -76,13 +76,13 @@
                     <div
                         class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
                         <div class="relative aspect-video overflow-hidden">
-                            <img src="{{ asset($project->after_image) }}" alt="{{ $project->title }}"
+                            <img src="{{ $project->after_image_url }}" alt="{{ $project->title }}"
                                 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 
                             @if ($project->before_image)
                                 <div
                                     class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <img src="{{ asset($project->before_image) }}" alt="Before"
+                                    <img src="{{ $project->before_image_url }}" alt="Before"
                                         class="max-h-[80%] max-w-[80%] object-contain rounded shadow-lg">
                                 </div>
                             @endif

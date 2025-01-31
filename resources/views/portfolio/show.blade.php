@@ -43,8 +43,10 @@
                             <div class="grid md:grid-cols-2 gap-8">
                                 <div class="space-y-4">
                                     <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg">
-                                        <img src="{{ Storage::url($portfolio->before_image) }}" alt="Before"
-                                            class="w-full h-full object-cover">
+                                        @if (isset($portfolio->before_image))
+                                            <img src="{{ Storage::url($portfolio->before_image) }}" alt="Before"
+                                                class="w-full h-full object-cover">
+                                        @endif
                                         <div
                                             class="absolute top-4 left-4 px-3 py-1 bg-black/50 text-white text-sm rounded-full backdrop-blur-sm">
                                             Before
@@ -53,8 +55,10 @@
                                 </div>
                                 <div class="space-y-4">
                                     <div class="relative aspect-video rounded-xl overflow-hidden shadow-lg">
-                                        <img src="{{ Storage::url($portfolio->after_image) }}" alt="After"
-                                            class="w-full h-full object-cover">
+                                        @if (isset($portfolio->after_image))
+                                            <img src="{{ Storage::url($portfolio->after_image) }}" alt="After"
+                                                class="w-full h-full object-cover">
+                                        @endif
                                         <div
                                             class="absolute top-4 left-4 px-3 py-1 bg-[#3B4BA6]/50 text-white text-sm rounded-full backdrop-blur-sm">
                                             After

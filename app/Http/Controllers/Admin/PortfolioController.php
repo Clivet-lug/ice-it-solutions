@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
+use App\Http\Traits\HasImages;
 use App\Http\Controllers\Controller;
+use App\Traits\HasImages as TraitsHasImages;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
+    use TraitsHasImages;
+
     public function index()
     {
         $portfolios = Portfolio::latest()->paginate(10);
@@ -37,19 +41,23 @@ class PortfolioController extends Controller
 
         // Handle image uploads
         if ($request->hasFile('before_image')) {
-            $validated['before_image'] = $request->file('before_image')->store('portfolio', 'public');
+            $validated['before_image'] = $this->storeImage(
+                $request->file('before_image'),
+                'portfolio/before'
+            );
         }
 
         if ($request->hasFile('after_image')) {
-            $validated['after_image'] = $request->file('after_image')->store('portfolio', 'public');
+            $validated['after_image'] = $this->storeImage(
+                $request->file('after_image'),
+                'portfolio/after'
+            );
         }
 
         // Convert technologies string to array
-        if (!empty($validated['technologies'])) {
-            $validated['technologies'] = array_map('trim', explode(',', $validated['technologies']));
-        } else {
-            $validated['technologies'] = [];
-        }
+        $validated['technologies'] = !empty($validated['technologies'])
+            ? array_map('trim', explode(',', $validated['technologies']))
+            : [];
 
         Portfolio::create($validated);
 
@@ -77,21 +85,20 @@ class PortfolioController extends Controller
             'is_featured' => 'boolean'
         ]);
 
-        // Handle image uploads
         if ($request->hasFile('before_image')) {
-            // Delete old image if exists
-            if ($portfolio->before_image) {
-                Storage::disk('public')->delete($portfolio->before_image);
-            }
-            $validated['before_image'] = $request->file('before_image')->store('portfolio', 'public');
+            $this->deleteImage($portfolio->before_image);
+            $validated['before_image'] = $this->storeImage(
+                $request->file('before_image'),
+                'portfolio/before'
+            );
         }
 
         if ($request->hasFile('after_image')) {
-            // Delete old image if exists
-            if ($portfolio->after_image) {
-                Storage::disk('public')->delete($portfolio->after_image);
-            }
-            $validated['after_image'] = $request->file('after_image')->store('portfolio', 'public');
+            $this->deleteImage($portfolio->after_image);
+            $validated['after_image'] = $this->storeImage(
+                $request->file('after_image'),
+                'portfolio/after'
+            );
         }
 
         // Convert technologies string to array
