@@ -17,7 +17,7 @@
                 </div>
             @endif
 
-            @if (isset($featured) && $featured)
+            @if ((isset($featured) && $featured) || $project->is_featured)
                 <div class="absolute top-4 right-4">
                     <span
                         class="inline-flex items-center px-2.5 py-1 rounded-md bg-green-100 text-green-800 text-xs font-medium">
