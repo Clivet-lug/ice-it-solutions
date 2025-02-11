@@ -84,33 +84,45 @@ class ContactController extends Controller
             'subject' => 'nullable|string|max:255'
         ]);
 
-        try {
-            // Create new contact entry
-            $contact = Contact::create($validated);
+        // try {
+        // Create new contact entry
+        $contact = Contact::create($validated);
 
-            // Send notification email to admin
-            $this->sendAdminNotification($contact);
+        // Send notification email to admin
+        $this->sendAdminNotification($contact);
 
-            // Send confirmation email to user
-            $this->sendUserConfirmation($contact);
+        // Send confirmation email to user
+        $this->sendUserConfirmation($contact);
 
-            // Return success response
-            return redirect()->back()->with('success', 'Thank you for your message. We will contact you soon!');
-        } catch (\Exception $e) {
-            // Log the error
-            Log::error('Contact form submission error: ' . $e->getMessage());
+        // Return success response
+        return redirect()->back()->with('success', 'Thank you for your message. We will contact you soon!');
+        // } catch (\Exception $e) {
+        //     // Log the error
+        //     Log::error('Contact form submission error: ' . $e->getMessage());
 
-            // Return error response
-            return redirect()->back()
-                ->with('error', 'Sorry, there was a problem submitting your message. Please try again.')
-                ->withInput();
-        }
+        //     // Return error response
+        //     return redirect()->back()
+        //         ->with('error', 'Sorry, there was a problem submitting your message. Please try again.')
+        //         ->withInput();
+        // }
     }
 
 
     public function show()
     {
-        return view('contact.show');
+        // Check if user has permission to view
+        // if (!auth()->user()->is_admin) {
+        //     abort(403);
+        // }
+
+        return view('contact.index');
+    }
+
+    // Admin method for showing contact details
+    public function adminShow(Contact $contact)
+    {
+        // This method is protected by middleware, so we know the user is authenticated and admin
+        return view('contact.show', compact('contact'));
     }
 
 

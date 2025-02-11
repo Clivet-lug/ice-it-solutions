@@ -92,9 +92,21 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'clivetlungu@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+
+        /*
+    |--------------------------------------------------------------------------
+    | Admin Email Address
+    |--------------------------------------------------------------------------
+    |
+    | This address will be used to send notifications to admin
+    | when new contact form submissions are received.
+    |
+    */
+
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'clivetlungu@gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
