@@ -31,16 +31,17 @@
                 <h3 class="text-lg font-bold mb-6 tracking-wider">CUSTOMERS</h3>
                 <ul class="space-y-3">
                     <!-- Support center/help desk page -->
-                    <li><a href="#"
+                    <li><a href="{{ route('contact') }}"
                             class="text-gray-300 hover:text-white transition-colors duration-200">Support</a></li>
                     <!-- Documentation and user guides -->
-                    <li><a href="#"
+                    <li><a href="{{ route('contact') }}"
                             class="text-gray-300 hover:text-white transition-colors duration-200">Guides</a></li>
                     <!-- Frequently asked questions page -->
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors duration-200">FAQs</a>
+                    <li><a href="{{ route('contact') }}"
+                            class="text-gray-300 hover:text-white transition-colors duration-200">FAQs</a>
                     </li>
                     <!-- Customer testimonials page -->
-                    <li><a href="#"
+                    <li><a href="{{ route('contact') }}"
                             class="text-gray-300 hover:text-white transition-colors duration-200">Testimonials</a></li>
                 </ul>
             </div>
