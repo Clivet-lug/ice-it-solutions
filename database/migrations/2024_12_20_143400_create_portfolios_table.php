@@ -17,7 +17,7 @@ class CreatePortfoliosTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('type', ['website', 'software', 'document', 'presentation']);
+            $table->enum('type', ['website','webapp', 'software', 'document', 'presentation']);
             $table->json('technologies')->nullable();
             $table->string('client_name')->nullable();
             $table->string('before_image')->nullable();
