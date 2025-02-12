@@ -52,14 +52,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Contact
+    // Contact routes
     Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
-    Route::get('/contacts', [ContactController::class, 'list'])->name('contact.list');
+    Route::get('/contacts/export', [ContactController::class, 'export'])->name('contact.export'); // Add this line
     Route::get('/contacts/{contact}', [ContactController::class, 'adminshow'])->name('contact.show');
     Route::patch('/contacts/{contact}/status', [ContactController::class, 'updateStatus'])->name('contact.update-status');
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
     Route::post('/contacts/{contact}/mark-read', [ContactController::class, 'markAsRead'])->name('contact.mark-read');
-    Route::get('/contacts/export', [ContactController::class, 'export'])->name('contact.export');
 
     // Service and Requests
     Route::resource('services', AdminServiceController::class);

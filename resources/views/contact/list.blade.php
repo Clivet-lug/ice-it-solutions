@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Contact Submissions - Admin')
 
@@ -15,7 +15,7 @@
 
             <!-- Export Button (Optional) -->
             <div class="mt-4 sm:mt-0">
-                <a href="{{ route('contact.export') }}"
+                <a href="{{ route('admin.contact.export') }}"
                     class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -30,7 +30,7 @@
         <!-- Filters Section -->
         <div class="mt-8 bg-white rounded-lg shadow">
             <div class="p-6">
-                <form action="{{ route('contact.list') }}" method="GET"
+                <form action="{{ route('admin.contact.list') }}" method="GET"
                     class="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:space-x-4">
                     <!-- Status Filter -->
                     <div class="flex-1">
@@ -155,10 +155,10 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center space-x-3">
-                                    <a href="{{ route('contact.show', $contact) }}"
+                                    <a href="{{ route('admin.contact.show', $contact) }}"
                                         class="text-blue-600 hover:text-blue-900">View</a>
                                     @if ($contact->status === 'new')
-                                        <form action="{{ route('contact.markAsRead', $contact) }}" method="POST"
+                                        <form action="{{ route('admin.contact.mark-read', $contact) }}" method="POST"
                                             class="inline">
                                             @csrf
                                             <button type="submit" class="text-gray-600 hover:text-gray-900">
@@ -166,7 +166,7 @@
                                             </button>
                                         </form>
                                     @endif
-                                    <form action="{{ route('contact.destroy', $contact) }}" method="POST"
+                                    <form action="{{ route('admin.contact.destroy', $contact) }}" method="POST"
                                         class="inline"
                                         onsubmit="return confirm('Are you sure you want to delete this contact?');">
                                         @csrf

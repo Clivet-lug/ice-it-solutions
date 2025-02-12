@@ -52,7 +52,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Email</p>
-                            <p class="text-lg font-medium text-gray-900">iceitsols@gmail.com</p>
+                            <p class="text-lg font-medium text-gray-900">clivetlungu@gmail.com</p>
                         </div>
                     </div>
                 </div>

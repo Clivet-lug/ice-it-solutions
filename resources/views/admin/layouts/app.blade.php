@@ -18,8 +18,9 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
+
         <!-- Mobile Menu Button - Only visible on mobile -->
-        <div class="lg:hidden bg-white shadow">
+        <div class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white shadow">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center">
                     <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-8 w-auto">
@@ -35,15 +36,17 @@
 
         <div class="flex">
             <!-- Sidebar - Hidden by default on mobile -->
-            <div id="sidebar"
-                class="fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition duration-200 ease-in-out lg:flex">
+            @include('partials.admin._sidebar')
+            {{-- <div id="sidebar"
+                class="fixed inset-y-0 left-0 transform -translate-x-full lg:relative lg:translate-x-0 transition duration-200 ease-in-out">
                 @include('partials.admin._sidebar')
-            </div>
+            </div> --}}
+
 
             <!-- Main Content -->
-            <div class="flex-1 w-full lg:w-auto">
+            <div class="flex-1 ml-64">
                 <!-- Top Navigation -->
-                <div class="bg-white shadow">
+                <div class="bg-white shadow fixed top-0 right-0 left-0 lg:left-64 z-30">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-end h-16">
                             <div class="flex items-center">
@@ -60,7 +63,7 @@
                 </div>
 
                 <!-- Page Content -->
-                <main class="py-6 px-4 sm:px-6 lg:px-8">
+                <main class="pt-16 py-6 px-4 sm:px-6 lg:px-8">
                     @yield('content')
                 </main>
             </div>

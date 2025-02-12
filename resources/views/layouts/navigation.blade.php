@@ -22,7 +22,7 @@
                 <a href="{{ route('services') }}" class="{{ $navLinkClass }}">SERVICES</a>
                 <a href="{{ route('pricing.index') }}" class="{{ $navLinkClass }}">PRICING</a>
                 <a href="{{ route('portfolio.index') }}" class="{{ $navLinkClass }}">PORTFOLIO</a>
-                <a href="#" class="{{ $navLinkClass }}">RESOURCES</a>
+                <a href="{{ route('contact') }}" class="{{ $navLinkClass }}">CONTACT US</a>
             </div>
 
             <!-- Right Side: Auth -->
@@ -91,10 +91,10 @@
                 {{ request()->routeIs('portfolio.*') ? 'bg-white/10' : '' }}">
                     Portfolio
                 </a>
-                <a href="#"
+                <a href="{{ route('contact') }}"
                     class="block px-4 py-3 text-white hover:bg-white/10 rounded-lg transition-colors
-                {{ request()->routeIs('resources') ? 'bg-white/10' : '' }}">
-                    Resources
+                {{ request()->routeIs('contact') ? 'bg-white/10' : '' }}">
+                    Contact us
                 </a>
             </div>
 

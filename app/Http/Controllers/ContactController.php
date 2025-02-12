@@ -108,21 +108,21 @@ class ContactController extends Controller
     }
 
 
-    public function show()
+    public function show(Contact $contact)
     {
         // Check if user has permission to view
         // if (!auth()->user()->is_admin) {
         //     abort(403);
         // }
 
-        return view('contact.index');
+        return view('contact.index', compact('contact'));
     }
 
     // Admin method for showing contact details
     public function adminShow(Contact $contact)
     {
         // This method is protected by middleware, so we know the user is authenticated and admin
-        return view('contact.show', compact('contact'));
+        return view('admin.contact.show', compact('contact'));
     }
 
 

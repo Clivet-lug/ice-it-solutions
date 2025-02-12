@@ -1,10 +1,10 @@
-<aside class="bg-blue-900 text-white w-64 min-h-screen">
-    <div class="p-6 flex items-center">
+<aside class="bg-blue-900 text-white w-64 fixed top-0 left-0 h-screen flex flex-col">
+    <div class="p-6 flex items-center flex-shrink-0">
         <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-8 w-auto mr-3 hidden lg:block">
         <h1 class="text-2xl font-bold">Admin Panel</h1>
     </div>
 
-    <nav class="mt-6 space-y-1">
+    <nav class="mt-6 space-y-1 flex-1 overflow-y-auto">
         <a href="{{ route('admin.dashboard') }}"
             class="flex items-center px-6 py-3 hover:bg-blue-800 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-800' : '' }}">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,6 +47,7 @@
             </svg>
             Pricing
         </a>
+
         <a href="{{ route('admin.pricing-requests.index') }}"
             class="flex items-center px-6 py-3 hover:bg-blue-800 {{ request()->routeIs('admin.pricing-requests.*') ? 'bg-blue-800' : '' }}">
             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,5 +56,15 @@
             </svg>
             Pricing Requests
         </a>
+
+        <a href="{{ route('admin.contact.list') }}"
+            class="flex items-center px-6 py-3 hover:bg-blue-800 {{ request()->routeIs('admin.contact.*') ? 'bg-blue-800' : '' }}">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contact Submissions
+        </a>
+
     </nav>
 </aside>
